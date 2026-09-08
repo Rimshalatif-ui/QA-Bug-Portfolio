@@ -1,32 +1,34 @@
-# Test Plan: Login Module
+# Test Plan: SauceDemo E-Commerce Application
+
+**App URL:** https://www.saucedemo.com
 
 ## 1. Objective
-To verify that the login functionality works as expected across valid, invalid, and edge-case scenarios, ensuring a secure and user-friendly authentication process.
+To verify that the login, product browsing, cart, and checkout functionalities of the SauceDemo application work as expected across valid, invalid, and edge-case scenarios.
 
 ## 2. Scope
 **In Scope:**
-- Login with valid/invalid credentials
-- Password validation rules
-- Forgot Password flow
-- Field-level validations (empty fields, special characters)
+- Login with different user types (standard, locked-out, problem, performance-glitch users)
+- Product listing and sorting
+- Add/remove items from cart
+- Checkout flow (information entry, order summary, order completion)
 
 **Out of Scope:**
-- Backend database performance testing
-- Third-party SSO integrations
+- Backend/database testing
+- Payment gateway integration (SauceDemo uses a mock checkout)
 
 ## 3. Test Approach
-- Manual functional testing for UI validations
-- Exploratory testing for edge cases
-- Automation (Cypress) for regression coverage on critical login flows
+- Manual functional testing for UI validations and user flows
+- Exploratory testing to uncover visual/UX bugs (e.g., problem_user image issue)
+- Automation (Cypress) for regression coverage on critical flows: login, add to cart, checkout
 
 ## 4. Environment
 - Browser: Chrome, Firefox
 - OS: Windows 11
-- Test Data: Predefined valid/invalid user accounts
+- Test Data: Predefined SauceDemo users (standard_user, locked_out_user, problem_user, performance_glitch_user)
 
 ## 5. Entry Criteria
-- Login module development completed
-- Test environment stable and accessible
+- Application accessible at https://www.saucedemo.com
+- Test data (user credentials) available
 
 ## 6. Exit Criteria
 - All planned test cases executed
@@ -36,10 +38,11 @@ To verify that the login functionality works as expected across valid, invalid, 
 ## 7. Deliverables
 - Test Cases (see `test-cases/`)
 - Bug Reports (see `bug-reports/`)
+- Cypress Automation Scripts (see `automation/`)
 - Test Execution Summary
 
 ## 8. Risks & Mitigation
 | Risk | Mitigation |
 |---|---|
-| Unstable test environment | Coordinate with dev team for environment readiness |
-| Incomplete test data | Prepare test data in advance |
+| Third-party demo site may change without notice | Re-validate test cases periodically |
+| Limited backend visibility (mock data) | Focus testing on UI/UX and functional flows |
