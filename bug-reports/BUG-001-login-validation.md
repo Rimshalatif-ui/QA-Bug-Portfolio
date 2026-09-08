@@ -1,8 +1,10 @@
 # Bug Report: BUG-001
 
-**Title:** Login page accepts invalid password format without validation error
+**Title:** Product images are incorrect/swapped when logged in as problem_user
 
-**Module:** Login
+**App:** SauceDemo (https://www.saucedemo.com)
+
+**Module:** Products Page
 
 **Environment:** Chrome v128, Windows 11
 
@@ -11,16 +13,15 @@
 **Priority:** High
 
 ## Steps to Reproduce
-1. Navigate to the login page
-2. Enter a valid username
-3. Enter a password with only 2 characters
-4. Click "Login"
+1. Navigate to https://www.saucedemo.com
+2. Login with username: `problem_user`, password: `secret_sauce`
+3. Observe the product images on the Products page
 
 ## Expected Result
-System should display a validation error stating "Password must be at least 8 characters."
+Each product should display its correct, corresponding image.
 
 ## Actual Result
-No validation error is shown; the request is submitted to the server directly.
+All product images are identical (showing the same dog image) instead of their actual product photos, making items visually indistinguishable.
 
 ## Attachments
 _(Add screenshot here if available)_
