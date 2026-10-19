@@ -3,11 +3,9 @@ Description
 After the user removes every item, the cart is empty but the “Checkout” button still works. The user can go through the whole checkout flow, and clicking “Finish” places the order and shows the “Thank you for your order!” screen. An order with no items should never be possible, so checkout should be blocked when the cart is empty.
 
 Preconditions
-
 User is logged in.
 
 Steps to Reproduce
-
 Go to https://www.saucedemo.com/ and log in.
 On the Products page, click “Add to cart” on 5 products: Sauce Labs Bike Light, Sauce Labs Onesie, Sauce Labs Bolt T-Shirt, Test.allTheThings() T-Shirt (Red) and Sauce Labs Fleece Jacket. The cart badge shows 5.
 Click the cart icon.
@@ -18,12 +16,10 @@ On the Checkout: Overview page, check the item list and the totals.
 Click “Finish”.
 
 Test Data
-
 Products added and then removed: Sauce Labs Bike Light, Sauce Labs Onesie, Sauce Labs Bolt T-Shirt, Test.allTheThings() T-Shirt (Red), Sauce Labs Fleece Jacket
 Checkout details: random test values (for example First Name “Test”, Last Name “User”, Zip “12345”)
 
 Actual Result
-
 The “Checkout” button is still enabled after the last item is removed.
 The Checkout: Your Information page opens and accepts the details.
 The Checkout: Overview page opens with no items, and the totals show $0.00 [To confirm the exact amounts shown].
@@ -31,18 +27,15 @@ Clicking “Finish” places the order and opens /checkout-complete.html with �
 No error or warning appears at any step.
 
 Expected Result
-
 When the cart is empty, the “Checkout” button is disabled or hidden.
 The cart page shows a message, for example “Your cart is empty. Add items to continue.”
 If the user opens a checkout page directly by URL with an empty cart, they’re sent back to the cart or products page with the same message.
 An order can only be placed when the cart has at least one item.
 
 Reproducibility
-
 Always (100%). Seen in the Jam recording [To confirm the number of tries].
 
 Impact
-
 Affects all users.
 Empty orders can be created, which can fill the order system with fake orders and confuse users, support and fulfilment.
 Workaround: Users don’t need one, but nothing stops it from happening.
@@ -51,13 +44,11 @@ Attachments
 https://jam.dev/c/c0299d30-fb5d-48a9-b31d-2efef80c87ad
 
 Suggested Fix (optional)
-
 Disable the “Checkout” button when the cart has 0 items, and update it as soon as the last item is removed.
 Add a check on every checkout step (Your Information, Overview and Finish) that sends the user back to the cart if it’s empty.
 Also block empty orders on the server, not only in the UI.
 
 Acceptance Criteria
-
  Given the cart is empty, when the user opens the cart page, then the “Checkout” button is disabled and an empty-cart message is shown.
  Given the user removes the last item from the cart, when the cart becomes empty, then the “Checkout” button is disabled right away.
  Given the cart is empty, when the user opens /checkout-step-one.html, /checkout-step-two.html or /checkout-complete.html directly, then they’re sent back to the cart with the empty-cart message.
