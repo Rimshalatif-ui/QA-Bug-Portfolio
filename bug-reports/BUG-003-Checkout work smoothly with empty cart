@@ -22,7 +22,7 @@ Checkout details: random test values (for example First Name “Test”, Last Na
 Actual Result
 The “Checkout” button is still enabled after the last item is removed.
 The Checkout: Your Information page opens and accepts the details.
-The Checkout: Overview page opens with no items, and the totals show $0.00 [To confirm the exact amounts shown].
+The Checkout: Overview page opens with no items, and the totals show $0.00 .
 Clicking “Finish” places the order and opens /checkout-complete.html with “Thank you for your order!”.
 No error or warning appears at any step.
 
