@@ -1,0 +1,70 @@
+Environment
+
+Environment: Production (public demo site)
+URL: https://www.saucedemo.com/inventory.html
+Device: Desktop
+OS: Windows 11
+Browser: Chrome
+
+Description
+When the user adds products to the cart, each product’s “Add to cart” button changes to “Remove”. If the user then clicks “Reset App State” in the side menu, the cart is reset: the items are removed and the cart badge disappears. But the product buttons aren’t reset. They still show “Remove”, even though those products are no longer in the cart. The buttons should change back to “Add to cart” at the same moment the cart is reset.
+
+Preconditions
+
+User is logged in.
+The cart is empty.
+
+Steps to Reproduce
+
+Go to https://www.saucedemo.com/ and log in.
+On the Products page, click “Add to cart” on 2 or 3 products (for example Sauce Labs Backpack and Sauce Labs Bike Light).
+Check that those buttons change to “Remove” and the cart badge shows the number of items.
+Open the side menu (top left).
+Click “Reset App State”.
+Close the menu and look at the cart badge and the product buttons.
+Click “Remove” on one of those products [To confirm what happens].
+Open the cart.
+
+Test Data
+
+Products added: Sauce Labs Backpack, Sauce Labs Bike Light [To confirm]
+
+Actual Result
+
+After “Reset App State”, the cart badge disappears and the cart is empty.
+The buttons on the products that were added still show “Remove”.
+The buttons don’t match the cart: the page shows the products as in the cart, but the cart is empty.
+The buttons only change back to “Add to cart” after a page reload [To confirm].
+
+Expected Result
+
+After “Reset App State”, every product button changes back to “Add to cart” straight away, without a page reload.
+The cart badge is removed and the cart is empty.
+The buttons and the cart always show the same state.
+
+Reproducibility
+
+Always [To confirm the number of tries]
+
+Impact
+
+Affects all users who use “Reset App State”.
+Users see the wrong cart state, and clicking “Remove” or “Add to cart” afterwards may do something unexpected.
+Workaround: Reload the page after “Reset App State”.
+
+Attachments
+
+https://jam.dev/c/19625fa2-748e-460a-b6ff-3f4e0e2572f6
+
+Suggested Fix (optional)
+
+When “Reset App State” is clicked, update the product buttons from the same cart state that gets cleared, so they show “Add to cart” again.
+Apply the same reset to the button on the product detail page.
+
+Acceptance Criteria
+
+ Given products have been added to the cart, when the user clicks “Reset App State”, then every “Remove” button on the Products page changes back to “Add to cart” without a page reload.
+ Given “Reset App State” has been clicked, when the user looks at the cart icon, then no badge is shown.
+ Given “Reset App State” has been clicked, when the user opens a product detail page, then its button shows “Add to cart”.
+ Given “Reset App State” has been clicked, when the user clicks “Add to cart” on any product, then the item is added and the badge shows 1.
+ Adding and removing items without using “Reset App State” still works as before.
