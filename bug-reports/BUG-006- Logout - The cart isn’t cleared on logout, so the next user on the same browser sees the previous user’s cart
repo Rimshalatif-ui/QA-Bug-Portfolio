@@ -1,0 +1,51 @@
+
+Environment: Production (public demo site)
+URL: https://www.saucedemo.com/
+Build / Version: index-DnLqFcJI.js
+Device: Desktop
+OS: Windows 11
+Browser: Chrome
+User role / Test account: standard_user, then a second user (for example visual_user)
+
+Description
+When a user logs out, only the login session is removed. The cart is saved in the browser’s storage, isn’t cleared, and isn’t tied to a user. So when a different user logs in on the same browser, they see the first user’s cart, with the same badge number and products, and can check those products out.
+
+Preconditions
+The cart is empty.
+
+Steps to Reproduce
+Log in as standard_user.
+Add Sauce Labs Backpack and Sauce Labs Bike Light to the cart. The badge shows 2.
+Open the menu and click “Logout”.
+Log in as a different user, for example visual_user.
+Look at the cart badge and open the cart.
+
+Test Data
+First user: standard_user
+Second user: visual_user
+Products: Sauce Labs Backpack, Sauce Labs Bike Light
+
+Actual Result
+After logging in as the second user, the badge shows 2.
+The cart shows the first user’s products.
+The second user can check out the first user’s products.
+
+Expected Result
+Logout clears the cart, or each user has their own cart.
+A new user who logs in on the same browser starts with an empty cart.
+
+Reproducibility
+Always (worked out from the code) [To confirm in the browser]
+
+Impact
+Affects anyone using a shared or public computer.
+One user can see what another user planned to buy, which is a privacy issue.
+Workaround: Use “Reset App State” before logging out.
+
+Suggested Fix (optional)
+Clear “cart-contents” on logout, or save the cart separately for each username.
+
+Acceptance Criteria
+Given a user with items in the cart, when they log out, then the cart is cleared.
+Given user A logged out with items in the cart, when user B logs in on the same browser, then user B’s cart is empty.
+Given the product team decides a cart should be kept after logout, when a user logs back in, then only that user’s own cart is shown [To confirm the wanted behaviour].
