@@ -35,7 +35,10 @@ Logout clears the cart, or each user has their own cart.
 A new user who logs in on the same browser starts with an empty cart.
 
 Reproducibility
-Always (worked out from the code) [To confirm in the browser]
+Always 
+
+Attachment
+https://jam.dev/c/a2706d7d-db61-4a7d-bfb3-e209e7fb52ca
 
 Impact
 Affects anyone using a shared or public computer.
