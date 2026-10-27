@@ -1,3 +1,6 @@
+App: SauceDemo (https://www.saucedemo.com)
+Module: Login
+Environment: Chrome v128, Windows 11
 
 Description
 After the user removes every item, the cart is empty but the “Checkout” button still works. The user can go through the whole checkout flow, and clicking “Finish” places the order and shows the “Thank you for your order!” screen. An order with no items should never be possible, so checkout should be blocked when the cart is empty.
