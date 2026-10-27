@@ -1,0 +1,57 @@
+Environment
+
+Environment: Production (public demo site)
+URL: https://www.saucedemo.com/checkout-step-two.html
+Build / Version: index-DnLqFcJI.js
+Device: Desktop
+OS: Windows 11
+Browser: Chrome
+User role / Test account: standard_user
+
+Description
+Checkout has two steps: “Your Information”, where First Name, Last Name and Zip/Postal Code are required, and “Overview”. The Overview page doesn’t check that step one was completed. A user can open /checkout-step-two.html directly and click “Finish”, and the order goes through with no first name, last name or postal code. In the same way, /checkout-complete.html can be opened directly and shows “Thank you for your order!” even though no order was placed.
+
+Preconditions
+User is logged in as standard_user.
+At least one product is in the cart.
+
+Steps to Reproduce
+Log in as standard_user and add any product to the cart.
+Don’t click “Checkout”. Open https://www.saucedemo.com/checkout-step-two.html directly.
+Click “Finish”.
+Click “Generate PDF order” and open the PDF.
+Separately, open https://www.saucedemo.com/checkout-complete.html directly.
+
+Test Data
+Product: Sauce Labs Backpack
+
+Actual Result
+The Overview page opens without the “Your Information” step.
+“Finish” places the order and shows “Thank you for your order!”.
+The PDF receipt has no “Ship To” section, because no name or postal code was entered [To confirm].
+Opening /checkout-complete.html directly shows “Thank you for your order!” with no order.
+
+Expected Result
+Opening /checkout-step-two.html before finishing step one sends the user back to “Checkout: Your Information”.
+An order can only be finished when First Name, Last Name and Zip/Postal Code are filled in.
+Opening /checkout-complete.html without a finished order sends the user to the Products page.
+
+Reproducibility
+Always (worked out from the code) [To confirm in the browser]
+
+Impact
+Orders can be created without shipping details.
+The “Thank you” page can appear without an order, which is confusing.
+Workaround: None.
+
+Attachments
+https://jam.dev/c/67f6574e-c20e-41a5-946f-1d6d1ada5980
+
+Suggested Fix (optional)
+On the Overview page, check that the checkout details exist. If they don’t, send the user back to step one.
+On the Complete page, show the thank-you message only right after an order is placed.
+
+Acceptance Criteria
+Given the user hasn’t completed “Your Information”, when they open /checkout-step-two.html, then they’re sent to /checkout-step-one.html.
+Given no order was just placed, when the user opens /checkout-complete.html, then they’re sent to the Products page.
+Given the normal flow, when the user fills in step one and clicks “Finish”, then the order completes as before and the PDF shows the Ship To details.
