@@ -1,0 +1,70 @@
+Environment
+
+Environment: Production (public demo site)
+URL: https://www.saucedemo.com/checkout-step-two.html
+Build / Version: index-DnLqFcJI.js
+Device: Desktop
+OS: Windows 11
+Browser: Chrome
+User role / Test account: standard_user
+
+Description
+On the Checkout: Overview page, “Item total” isn’t rounded to 2 decimals. For some product combinations, the browser’s decimal maths produces a long number, so the page shows amounts like “$59.980000000000004” instead of “$59.98”. This happens for 18 different product combinations. The “Generate PDF order” receipt rounds the same value correctly, so the page and the receipt show different item totals.
+
+Preconditions
+
+User is logged in as standard_user.
+The cart is empty.
+
+Steps to Reproduce
+
+Log in as standard_user.
+Click “Add to cart” on Sauce Labs Bike Light ($9.99) and Sauce Labs Fleece Jacket ($49.99).
+Open the cart and click “Checkout”.
+Enter First Name, Last Name and Zip/Postal Code, then click “Continue”.
+Look at “Item total” on the Checkout: Overview page.
+
+Test Data
+These combinations all show a long decimal “Item total”:
+
+Bike Light + Fleece Jacket: shows $59.980000000000004 (should be $59.98)
+Onesie + Fleece Jacket: shows $57.980000000000004 (should be $57.98)
+Bike Light + Bolt T-Shirt + Onesie + Backpack: shows $63.959999999999994 (should be $63.96)
+Bike Light + Bolt T-Shirt + Onesie + Fleece Jacket: shows $83.96000000000001 (should be $83.96)
+Bike Light + Bolt T-Shirt + Test.allTheThings() T-Shirt (Red) + Fleece Jacket: shows $91.96000000000001 (should be $91.96)
+Bolt T-Shirt + Onesie + Test.allTheThings() T-Shirt (Red) + Fleece Jacket: shows $89.96000000000001 (should be $89.96)
+12 more combinations do the same.
+
+Actual Result
+
+“Item total” shows “$59.980000000000004” for Bike Light + Fleece Jacket.
+Tax ($4.80) and Total ($64.78) are rounded correctly, so only “Item total” is wrong.
+The PDF receipt from “Generate PDF order” shows “Item total $59.98” for the same order, which doesn’t match the page.
+
+Expected Result
+
+“Item total” is always shown with exactly 2 decimals, for example “$59.98”.
+The Overview page and the PDF receipt show the same amounts.
+
+Reproducibility
+
+Always for the combinations above (worked out from the code) [To confirm in the browser]
+
+Impact
+
+Affects all users who buy one of these 18 combinations.
+A wrong-looking price on the payment summary hurts trust and can make users think they’re being overcharged.
+Workaround: None.
+
+Attachments
+https://www.awesomescreenshot.com/image/64742790?key=d90a5cac5d11381d47d38a2a8b5aa777
+Suggested Fix (optional)
+
+Show “Item total” with toFixed(2), the same as Tax and Total.
+Better: do the price maths in cents (whole numbers) to avoid decimal errors.
+
+Acceptance Criteria
+
+ Given the cart has Bike Light + Fleece Jacket, when the user opens Checkout: Overview, then “Item total” shows “$59.98”.
+ Given any combination of the 6 products, when the user opens Checkout: Overview, then “Item total”, “Tax” and “Total” all show exactly 2 decimals.
+ Given a finished order, when the user clicks “Generate PDF order”, then the PDF amounts match the Overview page.
