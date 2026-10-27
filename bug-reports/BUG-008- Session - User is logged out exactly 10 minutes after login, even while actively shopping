@@ -1,0 +1,56 @@
+Environment
+
+Environment: Production (public demo site)
+URL: https://www.saucedemo.com/
+Build / Version: index-DnLqFcJI.js
+Device: Desktop
+OS: Windows 11
+Browser: Chrome
+User role / Test account: standard_user
+
+Description
+The login session is a cookie that expires exactly 10 minutes after login, and it’s never extended while the user is active. So a user who is still browsing, or is in the middle of checkout, is suddenly sent to the login page with no warning. The cart is kept, but anything typed into the checkout form is lost.
+
+Preconditions
+None.
+
+Steps to Reproduce
+Log in as standard_user and note the time.
+Keep using the site (add items, open products, go to checkout) for 10 minutes.
+After 10 minutes, click any link or button that opens another page.
+
+Test Data
+Session length: 10 minutes (600,000 ms in the code)
+
+Actual Result
+Exactly 10 minutes after login, the user is sent to the login page, even though they were active the whole time.
+The login page shows “You can only access ‘/checkout-step-one.html’ when you are logged in.” (or whichever page they tried to open).
+Anything typed into the checkout form is lost.
+No warning appears before the session ends.
+
+Expected Result
+The session is extended while the user is active (for example, it ends 10 minutes after the last action).
+If the session is about to end, the user sees a warning with a “Stay logged in” option.
+After logging in again, the user is taken back to the page they were on.
+
+Reproducibility
+Always (worked out from the code) [To confirm in the browser]
+
+Impact
+Affects users who shop for longer than 10 minutes.
+Losing checkout details and being logged out without warning is frustrating.
+Workaround: Log in again.
+
+Attachments
+
+Screen recording: [To add - being logged out at 10 minutes while active]
+Code: the “session-username” cookie is given a 10-minute expiry once, at login, and never renewed.
+
+Suggested Fix (optional)
+Renew the cookie’s expiry on each page change or user action.
+Show a warning 1 minute before the session ends.
+
+Acceptance Criteria
+Given a user who keeps using the site, when 10 minutes have passed since login, then they’re still logged in.
+Given a user who has done nothing for 10 minutes, when they open a page, then they’re asked to log in again.
+Given the session has ended, when the user logs in again, then they’re taken back to the page they were on.
