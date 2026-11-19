@@ -4,7 +4,7 @@ Hi, I'm Rimsha Latif — an SQA Engineer specializing in *Manual Testing* and *A
 This repository showcases my QA work, including test cases, bug reports, test plans, and automation scripts — reflecting my approach to ensuring software quality through structured testing and clear documentation.
 
 ## 🧰 Skills & Tools
-- Manual Testing (Functional, Regression, Smoke, UAT)
+- Manual Testing (Functional,Non Funstional, Regression, Smoke, UAT)
 - Automation: Cypress, JavaScript
 - AI Oriented testing with: TestRigor / Testcraft 
 - API Testing: Postman
